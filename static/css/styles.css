@@ -16,5 +16,9 @@
 }    
 
 .datepicker {
-  z-index: 10000;
+  z-index: 100000;
+}
+
+div.swal2-actions {
+  z-index: 0;
 }
