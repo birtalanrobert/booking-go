@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/birtalanrobert/bookings-go/internal/config"
 	"github.com/birtalanrobert/bookings-go/internal/handlers"
+	"github.com/birtalanrobert/bookings-go/internal/helpers"
 	"github.com/birtalanrobert/bookings-go/internal/models"
 	"github.com/birtalanrobert/bookings-go/internal/render"
 
@@ -19,6 +21,8 @@ const portNumber = ":8081"
 
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
 
 func main() {
 	err := run();	
@@ -47,6 +51,12 @@ func run() error {
 	// change this to true when in production
 	app.InProduction = false
 
+	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
+
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -67,8 +77,8 @@ func run() error {
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
-
 	render.NewTemplates(&app)
+	helpers.NewHelper(&app)
 
 	return nil
 }
