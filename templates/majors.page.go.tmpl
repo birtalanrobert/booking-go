@@ -27,27 +27,9 @@
 </div>
 {{end}}
 
+<script src="/static/js/search-availability.js"></script>
 {{define "js"}}
 <script>
-  document.getElementById("check-availability-button").addEventListener("click", function () {
-    const html = `
-        <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
-          <div class="form-row">
-            <div class="col">
-              <div class="form-row" id="reservation-dates-modal">
-                <div class="col">
-                  <input class="form-control" type="text" name="start" id="start" placeholder="Arrival" required disabled />
-                </div>
-                <div class="col">
-                  <input class="form-control" type="text" name="end" id="end" placeholder="Departure" required disabled />
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      `;
-
-    attention.custom({ msg: html, title: "Coose your dates" });
-  })
+  searchAvailability("2")
 </script>
 {{end}}
