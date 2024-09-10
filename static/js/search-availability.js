@@ -2,9 +2,9 @@ function searchAvailability(roomId) {
   document.getElementById("check-availability-button").addEventListener("click", function () {
     const html = `
         <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
-          <div class="form-row">
+          <div class="row">
             <div class="col">
-              <div class="form-row" id="reservation-dates-modal">
+              <div class="row" id="reservation-dates-modal">
                 <div class="col">
                   <input class="form-control" type="text" name="start" id="start" placeholder="Arrival" required disabled />
                 </div>
